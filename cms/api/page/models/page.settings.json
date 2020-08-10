@@ -9,11 +9,15 @@
     "timestamps": true
   },
   "attributes": {
-    "Title": {
-      "type": "string"
+    "locales": {
+      "collection": "page-locale",
+      "via": "page"
     },
-    "content": {
-      "type": "richtext"
+    "slug": {
+      "type": "string",
+      "private": false,
+      "required": true,
+      "unique": true
     }
   }
 }

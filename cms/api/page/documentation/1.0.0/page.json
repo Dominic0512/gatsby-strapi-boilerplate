@@ -516,16 +516,45 @@
     "schemas": {
       "Page": {
         "required": [
-          "id"
+          "id",
+          "slug"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "Title": {
-            "type": "string"
+          "locales": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "page": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
-          "content": {
+          "slug": {
             "type": "string"
           },
           "created_by": {
@@ -619,11 +648,17 @@
         }
       },
       "NewPage": {
+        "required": [
+          "slug"
+        ],
         "properties": {
-          "Title": {
-            "type": "string"
+          "locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
-          "content": {
+          "slug": {
             "type": "string"
           },
           "created_by": {

@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/posts": {
+    "/locales": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the locales's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve locales document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Post"
+                    "$ref": "#/components/schemas/Locales"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Post"
+          "Locales"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new locales record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve locales document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Post"
+                  "$ref": "#/components/schemas/Locales"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Post"
+          "Locales"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPost"
+                "$ref": "#/components/schemas/NewLocales"
               }
             }
           }
         }
       }
     },
-    "/posts/count": {
+    "/locales/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the numver of locales documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve locales document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Post"
+          "Locales"
         ],
         "parameters": []
       }
     },
-    "/posts/{id}": {
+    "/locales/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one locales record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve locales document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Post"
+                  "$ref": "#/components/schemas/Locales"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Post"
+          "Locales"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single locales record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve locales document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Post"
+                  "$ref": "#/components/schemas/Locales"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Post"
+          "Locales"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPost"
+                "$ref": "#/components/schemas/NewLocales"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single locales record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single locales based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Post"
+          "Locales"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Post": {
+      "Locales": {
         "required": [
           "id"
         ],
@@ -522,74 +522,15 @@
           "id": {
             "type": "string"
           },
-          "thumbnail": {
-            "required": [
-              "id",
-              "name",
-              "hash",
-              "mime",
-              "size",
-              "url",
-              "provider"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "alternativeText": {
-                "type": "string"
-              },
-              "caption": {
-                "type": "string"
-              },
-              "width": {
-                "type": "integer"
-              },
-              "height": {
-                "type": "integer"
-              },
-              "formats": {
-                "type": "object"
-              },
-              "hash": {
-                "type": "string"
-              },
-              "ext": {
-                "type": "string"
-              },
-              "mime": {
-                "type": "string"
-              },
-              "size": {
-                "type": "number"
-              },
-              "url": {
-                "type": "string"
-              },
-              "previewUrl": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "provider_metadata": {
-                "type": "object"
-              },
-              "related": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "label": {
+            "type": "string",
+            "default": "zh",
+            "enum": [
+              "en",
+              "zh"
+            ]
           },
-          "locales": {
+          "post_locales": {
             "type": "array",
             "items": {
               "required": [
@@ -609,6 +550,37 @@
                   "type": "string"
                 },
                 "locale": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "page_locales": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "page": {
                   "type": "string"
                 },
                 "created_by": {
@@ -710,9 +682,23 @@
           }
         }
       },
-      "NewPost": {
+      "NewLocales": {
         "properties": {
-          "locales": {
+          "label": {
+            "type": "string",
+            "default": "zh",
+            "enum": [
+              "en",
+              "zh"
+            ]
+          },
+          "post_locales": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "page_locales": {
             "type": "array",
             "items": {
               "type": "string"
@@ -730,7 +716,7 @@
   },
   "tags": [
     {
-      "name": "Post"
+      "name": "Locales"
     }
   ]
 }

@@ -312,19 +312,18 @@
     "schemas": {
       "Home": {
         "required": [
-          "id"
+          "id",
+          "services"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "title": {
-            "type": "string"
-          },
-          "covers": {
+          "services": {
             "type": "object",
             "required": [
-              "id"
+              "id",
+              "items"
             ],
             "properties": {
               "id": {
@@ -342,6 +341,12 @@
                       "type": "string"
                     },
                     "title": {
+                      "type": "string"
+                    },
+                    "desc": {
+                      "type": "string"
+                    },
+                    "link": {
                       "type": "string"
                     },
                     "thumbnail": {
@@ -410,9 +415,6 @@
                           "type": "string"
                         }
                       }
-                    },
-                    "link": {
-                      "type": "string"
                     }
                   }
                 }
@@ -510,14 +512,15 @@
         }
       },
       "NewHome": {
+        "required": [
+          "services"
+        ],
         "properties": {
-          "title": {
-            "type": "string"
-          },
-          "covers": {
+          "services": {
             "type": "object",
             "required": [
-              "id"
+              "id",
+              "items"
             ],
             "properties": {
               "id": {
@@ -535,6 +538,12 @@
                       "type": "string"
                     },
                     "title": {
+                      "type": "string"
+                    },
+                    "desc": {
+                      "type": "string"
+                    },
+                    "link": {
                       "type": "string"
                     },
                     "thumbnail": {
@@ -603,9 +612,6 @@
                           "type": "string"
                         }
                       }
-                    },
-                    "link": {
-                      "type": "string"
                     }
                   }
                 }

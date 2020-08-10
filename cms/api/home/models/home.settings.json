@@ -9,13 +9,11 @@
     "timestamps": true
   },
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "covers": {
+    "services": {
       "type": "component",
       "repeatable": false,
-      "component": "default.carousel"
+      "component": "default.card-container",
+      "required": true
     }
   }
 }
