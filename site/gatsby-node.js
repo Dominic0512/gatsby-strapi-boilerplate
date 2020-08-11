@@ -9,15 +9,33 @@
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  // Create blog articles pages.
-  // const articles = result.data.articles.edges
-  // articles.forEach((article, index) => {
-  //   createPage({
-  //     path: `/article/${article.node.strapiId}`,
-  //     component: require.resolve("./src/templates/article.js"),
-  //     context: {
-  //       id: article.node.strapiId,
-  //     },
-  //   })
-  // })
+  const {
+    data: {
+      strapi: { pages },
+    },
+  } = await graphql(`
+    {
+      strapi {
+        pages {
+          id
+          slug
+          locales(where: { locale: { label: "zh" } }) {
+            title
+            content
+          }
+        }
+      }
+    }
+  `)
+
+  //-- Create all pages.
+  pages.forEach(page => {
+    createPage({
+      path: `/page/${page.slug}`,
+      component: require.resolve("./src/templates/page.js"),
+      context: {
+        id: page.id,
+      },
+    })
+  })
 }

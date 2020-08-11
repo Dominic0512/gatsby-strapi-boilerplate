@@ -14,14 +14,22 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-strapi",
+      resolve: "gatsby-source-graphql",
       options: {
-        apiURL: "http://localhost:1337",
-        contentTypes: ["post", "page"],
-        singleTypes: [`home`],
-        queryLimit: 1000,
+        typeName: "STRAPI",
+        fieldName: "strapi",
+        url: "http://localhost:1337/graphql",
       },
     },
+    // {
+    //   resolve: "gatsby-source-strapi",
+    //   options: {
+    //     apiURL: "http://localhost:1337",
+    //     contentTypes: ["post", "page"],
+    //     singleTypes: [`home`],
+    //     queryLimit: 1000,
+    //   },
+    // },
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {

@@ -6,18 +6,19 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 
 const IndexPage = () => {
-  const { strapiHome: homeData } = useStaticQuery(
+  const data = useStaticQuery(
     graphql`
       query {
-        strapiHome {
-          id
-          services {
+        strapi {
+          home {
             id
-            items {
-              id
-              title
-              link
-              desc
+            services {
+              items {
+                id
+                title
+                desc
+                link
+              }
             }
           }
         }
@@ -34,7 +35,7 @@ const IndexPage = () => {
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
         <Image />
       </div>
-      <pre>{JSON.stringify(homeData)}</pre>
+      <pre>{JSON.stringify(data)}</pre>
       <Link to="/page-2/">Go to page 2</Link> <br />
       <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
     </Layout>
