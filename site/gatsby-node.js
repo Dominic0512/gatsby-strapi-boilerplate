@@ -31,10 +31,45 @@ exports.createPages = async ({ graphql, actions }) => {
   //-- Create all pages.
   pages.forEach(page => {
     createPage({
-      path: `/page/${page.slug}`,
+      path: `/pages/${page.slug}`,
       component: require.resolve("./src/templates/page.js"),
       context: {
         id: page.id,
+      },
+    })
+  })
+
+  const {
+    data: {
+      strapi: { posts },
+    },
+  } = await graphql(`
+    {
+      strapi {
+        posts {
+          id
+          thumbnail {
+            id
+            url
+          }
+          created_at
+          updated_at
+          locales(where: { locale: { label: "zh" } }) {
+            title
+            content
+          }
+        }
+      }
+    }
+  `)
+
+  //-- Create all pages.
+  posts.forEach(post => {
+    createPage({
+      path: `/posts/${post.id}`,
+      component: require.resolve("./src/templates/post.js"),
+      context: {
+        id: post.id,
       },
     })
   })
