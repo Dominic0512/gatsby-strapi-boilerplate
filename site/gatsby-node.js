@@ -1,3 +1,6 @@
+const R = require("ramda")
+const nodes = require("./src/nodes")
+
 /**
  * Implement Gatsby's Node APIs in this file.
  *
@@ -8,69 +11,7 @@
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-
-  const {
-    data: {
-      strapi: { pages },
-    },
-  } = await graphql(`
-    {
-      strapi {
-        pages {
-          id
-          slug
-          locales(where: { locale: { label: "zh" } }) {
-            title
-            content
-          }
-        }
-      }
-    }
-  `)
-
-  //-- Create all pages.
-  pages.forEach(page => {
-    createPage({
-      path: `/pages/${page.slug}`,
-      component: require.resolve("./src/templates/page.js"),
-      context: {
-        id: page.id,
-      },
-    })
-  })
-
-  const {
-    data: {
-      strapi: { posts },
-    },
-  } = await graphql(`
-    {
-      strapi {
-        posts {
-          id
-          thumbnail {
-            id
-            url
-          }
-          created_at
-          updated_at
-          locales(where: { locale: { label: "zh" } }) {
-            title
-            content
-          }
-        }
-      }
-    }
-  `)
-
-  //-- Create all pages.
-  posts.forEach(post => {
-    createPage({
-      path: `/posts/${post.id}`,
-      component: require.resolve("./src/templates/post.js"),
-      context: {
-        id: post.id,
-      },
-    })
-  })
+  const createHelpers = { graphql, createPage }
+  const pipeR = R.pipeWith(R.andThen)
+  await pipeR(nodes)(createHelpers)
 }
