@@ -1,7 +1,8 @@
-const createPostNode = helpers => {
+const createPostNode = (locale, helpers) => {
   return new Promise(async (resolve, reject) => {
     try {
       const { graphql, createPage } = helpers
+
       const {
         data: {
           strapi: { posts },
@@ -17,7 +18,7 @@ const createPostNode = helpers => {
               }
               created_at
               updated_at
-              locales(where: { locale: { label: "zh" } }) {
+              locales(where: { locale: { label: "${locale}" } }) {
                 title
                 content
               }
@@ -26,14 +27,14 @@ const createPostNode = helpers => {
         }
       `)
 
-      //-- Create all pages.
       posts.forEach(post => {
         console.log(
           createPage({
-            path: `/posts/${post.id}`,
+            path: `/${locale}/posts/${post.id}`,
             component: require.resolve("../templates/post.js"),
             context: {
               id: post.id,
+              locale,
             },
           })
         )

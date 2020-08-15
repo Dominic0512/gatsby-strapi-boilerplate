@@ -11,7 +11,34 @@ const nodes = require("./src/nodes")
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const createHelpers = { graphql, createPage }
+
+  const {
+    data: {
+      strapi: { locales },
+    },
+  } = await graphql(`
+    {
+      strapi {
+        locales {
+          id
+          label
+        }
+      }
+    }
+  `)
+
+  const localizeNodes = locales.reduce((result, locale) => {
+    const subNodes = nodes.map(node => {
+      return R.partial(node, [locale.label])
+    })
+    return [...result, ...subNodes]
+  }, [])
+
   const pipeR = R.pipeWith(R.andThen)
-  await pipeR(nodes)(createHelpers)
+  const createNodes = pipeR(localizeNodes)
+
+  await createNodes({
+    graphql,
+    createPage,
+  })
 }

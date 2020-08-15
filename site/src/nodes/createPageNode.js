@@ -1,4 +1,4 @@
-const createPageNode = helpers => {
+const createPageNode = (locale, helpers) => {
   return new Promise(async (resolve, reject) => {
     try {
       const { graphql, createPage } = helpers
@@ -12,7 +12,7 @@ const createPageNode = helpers => {
             pages {
               id
               slug
-              locales(where: { locale: { label: "zh" } }) {
+              locales(where: { locale: { label: "${locale}" } }) {
                 title
                 content
               }
@@ -21,13 +21,13 @@ const createPageNode = helpers => {
         }
       `)
 
-      //-- Create all pages.
       pages.forEach(page => {
         createPage({
-          path: `/pages/${page.slug}`,
+          path: `/${locale}/pages/${page.slug}`,
           component: require.resolve("../templates/page.js"),
           context: {
             id: page.id,
+            locale,
           },
         })
       })

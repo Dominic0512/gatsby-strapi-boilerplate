@@ -13,11 +13,11 @@ const Post = ({
 )
 
 export const postQuery = graphql`
-  query PostQuery($id: ID!) {
+  query PostQuery($id: ID!, $locale: String) {
     strapi {
       post(id: $id) {
         id
-        locales(where: { locale: { label: "zh" } }) {
+        locales(where: { locale: { label: $locale } }) {
           title
           content
         }
