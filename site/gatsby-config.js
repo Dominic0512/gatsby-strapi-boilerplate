@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "My super blog",
-    description: "Gatsby blog with Strapi",
-    author: "Strapi team",
+    title: "Demo Bolierplate",
+    description: "Gatsby Demo Website With Strapi",
+    author: "Dominic",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -21,15 +21,6 @@ module.exports = {
         url: "http://localhost:1337/graphql",
       },
     },
-    // {
-    //   resolve: "gatsby-source-strapi",
-    //   options: {
-    //     apiURL: "http://localhost:1337",
-    //     contentTypes: ["post", "page"],
-    //     singleTypes: [`home`],
-    //     queryLimit: 1000,
-    //   },
-    // },
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
