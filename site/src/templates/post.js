@@ -1,16 +1,20 @@
 import React from "react"
+import ReactMarkDown from "react-markdown"
 import { graphql } from "gatsby"
 
 const Post = ({
   data: {
     strapi: { post },
   },
-}) => (
-  <React.Fragment>
-    <h1>{post.id}</h1>
-    <pre>{JSON.stringify(post.locales)}</pre>
-  </React.Fragment>
-)
+}) => {
+  const content = post.locales[0]?.content
+  const contentTest = "ddddd"
+  return (
+    <React.Fragment>
+      <ReactMarkDown source={content}></ReactMarkDown>
+    </React.Fragment>
+  )
+}
 
 export const postQuery = graphql`
   query PostQuery($id: ID!, $locale: String) {
