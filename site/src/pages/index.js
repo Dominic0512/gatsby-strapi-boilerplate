@@ -4,13 +4,12 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
+import Box from "../components/box"
 
-import styled from 'styled-components'
-import { color } from 'styled-system'
+import { ThemeProvider } from "styled-components"
 
-const DemoStyledSystemCompo = styled.div`
-  ${color}
-`;
+import themes from "../theme"
+import useThemeMode from "../hooks/useThemeMode"
 
 const IndexPage = () => {
   const data = useStaticQuery(
@@ -33,20 +32,36 @@ const IndexPage = () => {
     `
   )
 
+  const {
+    availableThemeModes,
+    themeMode,
+    themeConfig,
+    changeThemeMode,
+  } = useThemeMode({
+    themes,
+    initThemeMode: "light",
+  })
+
   return (
-    <Layout>
-      <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Welcome to your new Gatsby site.</p>
-      <p>Now go build something great.</p>
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
-      </div>
-      <pre>{JSON.stringify(data)}</pre>
-      <DemoStyledSystemCompo color="navy">Demo Text Color</DemoStyledSystemCompo>
-      <Link to="/page-2/">Go to page 2</Link> <br />
-      <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-    </Layout>
+    <ThemeProvider theme={themeConfig}>
+      <Layout>
+        <SEO title="Home" />
+        <h1>Hi people</h1>
+        <p>Welcome to your new Gatsby site.</p>
+        <p>Now go build something great.</p>
+        <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+          <Image />
+        </div>
+        <pre>{JSON.stringify(data)}</pre>
+        <pre>{JSON.stringify(availableThemeModes)}</pre>
+        <Box color="default" bg="bgDefault">{`Demo Theme ${themeMode}`}</Box>
+        <button onClick={() => changeThemeMode(availableThemeModes[0])}>
+          Change
+        </button>
+        <Link to="/page-2/">Go to page 2</Link> <br />
+        <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
+      </Layout>
+    </ThemeProvider>
   )
 }
 

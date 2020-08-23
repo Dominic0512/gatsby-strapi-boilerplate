@@ -8,7 +8,6 @@ const Post = ({
   },
 }) => {
   const content = post.locales[0]?.content
-  const contentTest = "ddddd"
   return (
     <React.Fragment>
       <ReactMarkDown source={content}></ReactMarkDown>
